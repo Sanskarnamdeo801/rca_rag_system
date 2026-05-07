@@ -1,6 +1,8 @@
+from __future__ import annotations
+
 """Shared fixtures for the simplified RCA MVP tests."""
 
-from __future__ import annotations
+"""Shared fixtures for the simplified RCA MVP tests."""
 
 import json
 import sys
@@ -14,8 +16,10 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from app.config import Settings  # noqa: E402
-from app.main import create_app  # noqa: E402
+# ruff: noqa: E402
+
+from app.config import Settings
+from app.main import create_app
 
 
 @pytest.fixture()
