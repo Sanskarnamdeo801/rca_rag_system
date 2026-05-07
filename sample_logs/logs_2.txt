@@ -1,0 +1,399 @@
+timestamp: 2026-01-08T12:09:00
+service_name: payment-service
+log_level: ERROR
+error_message: Database connection timeout while processing card charge after request_id=req-0060 from 10.10.7.13
+stack_trace: DBConnectionTimeoutException at PaymentRepository.save
+Caused by socket timeout to primary postgres
+incident_id: INC1060
+resolution_notes: Restarted PostgreSQL service, increased connection timeout, and tuned pool saturation thresholds
+severity: HIGH
+
+timestamp: 2026-01-08T15:10:00
+service_name: auth-service
+log_level: ERROR
+error_message: JWT token signature validation failed for access token trace_id=abc0061 user impact observed in region ap-south-1
+stack_trace: TokenValidationException at AuthMiddleware.verify
+Issuer mismatch on rotated public key
+incident_id: INC1061
+resolution_notes: Rotated the expired signing key, refreshed issuer metadata, and invalidated stale token cache entries
+severity: HIGH
+
+timestamp: 2026-01-08T18:11:00
+service_name: notification-service
+log_level: ERROR
+error_message: Kafka consumer lag exceeded threshold due to broker timeout correlation_id=flow-0062 detected by synthetic monitor
+stack_trace: KafkaTimeoutError at NotificationEventConsumer.poll
+Leader election in progress
+incident_id: INC1062
+resolution_notes: Recovered broker quorum, rebalanced the consumer group, and increased fetch timeout settings
+severity: MEDIUM
+
+timestamp: 2026-01-08T21:12:00
+service_name: order-service
+log_level: ERROR
+error_message: Redis cache connection reset by peer during order lookup span_id=mesh-0063 observed during canary rollout
+stack_trace: RedisConnectionError at OrderCache.load
+Connection pool exhausted
+incident_id: INC1063
+resolution_notes: Restarted Redis primary, flushed the broken connection pool, and raised client pool limits
+severity: HIGH
+
+timestamp: 2026-01-09T00:13:00
+service_name: gateway-service
+log_level: WARNING
+error_message: CPU spike triggered upstream latency and circuit breaker fallback after request_id=req-0064 from 10.10.2.17
+stack_trace: GatewayOverloadException at UpstreamProxy.forward
+CPU usage exceeded 92 percent
+incident_id: INC1064
+resolution_notes: Scaled gateway replicas horizontally, enabled request shedding, and optimized expensive middleware
+severity: MEDIUM
+
+timestamp: 2026-01-09T03:14:00
+service_name: payment-service
+log_level: CRITICAL
+error_message: Memory leak detected in settlement worker causing pod eviction trace_id=abc0065 user impact observed in region ap-south-1
+stack_trace: OutOfMemoryError at SettlementAggregator.flush
+Heap retained orphaned transaction buffers
+incident_id: INC1065
+resolution_notes: Patched the leaking aggregator, reduced batch size, and rolled out a memory limit alert
+severity: CRITICAL
+
+timestamp: 2026-01-09T06:15:00
+service_name: gateway-service
+log_level: ERROR
+error_message: Network timeout to upstream order service over internal mesh correlation_id=flow-0066 detected by synthetic monitor
+stack_trace: SocketTimeoutException at MeshClient.execute
+Retries exhausted after packet loss
+incident_id: INC1066
+resolution_notes: Repaired the mesh sidecar routing rule, restored east-west connectivity, and tuned retry backoff
+severity: HIGH
+
+timestamp: 2026-01-09T09:16:00
+service_name: auth-service
+log_level: ERROR
+error_message: OAuth refresh token store unavailable due to database lock contention span_id=mesh-0067 observed during canary rollout
+stack_trace: DatabaseLockException at RefreshTokenRepository.update
+Deadlock found when trying to get lock
+incident_id: INC1067
+resolution_notes: Killed the blocking transaction, added index coverage, and reduced refresh token update contention
+severity: HIGH
+
+timestamp: 2026-01-09T12:00:00
+service_name: notification-service
+log_level: ERROR
+error_message: SMTP gateway unreachable during notification dispatch after request_id=req-0068 from 10.10.6.21
+stack_trace: NotificationDeliveryException at EmailSender.send
+Connection refused by relay host
+incident_id: INC1068
+resolution_notes: Failed over to the backup relay, updated the egress firewall rule, and lowered SMTP connection reuse
+severity: MEDIUM
+
+timestamp: 2026-01-09T15:01:00
+service_name: order-service
+log_level: ERROR
+error_message: Kafka producer retry exhaustion while publishing order-created event trace_id=abc0069 user impact observed in region ap-south-1
+stack_trace: KafkaPublishException at OrderPublisher.emit
+No broker available for partition leadership
+incident_id: INC1069
+resolution_notes: Recovered Kafka brokers, re-enabled idempotent producer retries, and drained the failed publisher queue
+severity: HIGH
+
+timestamp: 2026-01-09T18:02:00
+service_name: payment-service
+log_level: ERROR
+error_message: Database connection timeout while processing card charge correlation_id=flow-0070 detected by synthetic monitor
+stack_trace: DBConnectionTimeoutException at PaymentRepository.save
+Caused by socket timeout to primary postgres
+incident_id: INC1070
+resolution_notes: Restarted PostgreSQL service, increased connection timeout, and tuned pool saturation thresholds
+severity: HIGH
+
+timestamp: 2026-01-09T21:03:00
+service_name: auth-service
+log_level: ERROR
+error_message: JWT token signature validation failed for access token span_id=mesh-0071 observed during canary rollout
+stack_trace: TokenValidationException at AuthMiddleware.verify
+Issuer mismatch on rotated public key
+incident_id: INC1071
+resolution_notes: Rotated the expired signing key, refreshed issuer metadata, and invalidated stale token cache entries
+severity: HIGH
+
+timestamp: 2026-01-10T00:04:00
+service_name: notification-service
+log_level: ERROR
+error_message: Kafka consumer lag exceeded threshold due to broker timeout after request_id=req-0072 from 10.10.1.25
+stack_trace: KafkaTimeoutError at NotificationEventConsumer.poll
+Leader election in progress
+incident_id: INC1072
+resolution_notes: Recovered broker quorum, rebalanced the consumer group, and increased fetch timeout settings
+severity: MEDIUM
+
+timestamp: 2026-01-10T03:05:00
+service_name: order-service
+log_level: ERROR
+error_message: Redis cache connection reset by peer during order lookup trace_id=abc0073 user impact observed in region ap-south-1
+stack_trace: RedisConnectionError at OrderCache.load
+Connection pool exhausted
+incident_id: INC1073
+resolution_notes: Restarted Redis primary, flushed the broken connection pool, and raised client pool limits
+severity: HIGH
+
+timestamp: 2026-01-10T06:06:00
+service_name: gateway-service
+log_level: WARNING
+error_message: CPU spike triggered upstream latency and circuit breaker fallback correlation_id=flow-0074 detected by synthetic monitor
+stack_trace: GatewayOverloadException at UpstreamProxy.forward
+CPU usage exceeded 92 percent
+incident_id: INC1074
+resolution_notes: Scaled gateway replicas horizontally, enabled request shedding, and optimized expensive middleware
+severity: MEDIUM
+
+timestamp: 2026-01-10T09:07:00
+service_name: payment-service
+log_level: CRITICAL
+error_message: Memory leak detected in settlement worker causing pod eviction span_id=mesh-0075 observed during canary rollout
+stack_trace: OutOfMemoryError at SettlementAggregator.flush
+Heap retained orphaned transaction buffers
+incident_id: INC1075
+resolution_notes: Patched the leaking aggregator, reduced batch size, and rolled out a memory limit alert
+severity: CRITICAL
+
+timestamp: 2026-01-10T12:08:00
+service_name: gateway-service
+log_level: ERROR
+error_message: Network timeout to upstream order service over internal mesh after request_id=req-0076 from 10.10.5.10
+stack_trace: SocketTimeoutException at MeshClient.execute
+Retries exhausted after packet loss
+incident_id: INC1076
+resolution_notes: Repaired the mesh sidecar routing rule, restored east-west connectivity, and tuned retry backoff
+severity: HIGH
+
+timestamp: 2026-01-10T15:09:00
+service_name: auth-service
+log_level: ERROR
+error_message: OAuth refresh token store unavailable due to database lock contention trace_id=abc0077 user impact observed in region ap-south-1
+stack_trace: DatabaseLockException at RefreshTokenRepository.update
+Deadlock found when trying to get lock
+incident_id: INC1077
+resolution_notes: Killed the blocking transaction, added index coverage, and reduced refresh token update contention
+severity: HIGH
+
+timestamp: 2026-01-10T18:10:00
+service_name: notification-service
+log_level: ERROR
+error_message: SMTP gateway unreachable during notification dispatch correlation_id=flow-0078 detected by synthetic monitor
+stack_trace: NotificationDeliveryException at EmailSender.send
+Connection refused by relay host
+incident_id: INC1078
+resolution_notes: Failed over to the backup relay, updated the egress firewall rule, and lowered SMTP connection reuse
+severity: MEDIUM
+
+timestamp: 2026-01-10T21:11:00
+service_name: order-service
+log_level: ERROR
+error_message: Kafka producer retry exhaustion while publishing order-created event span_id=mesh-0079 observed during canary rollout
+stack_trace: KafkaPublishException at OrderPublisher.emit
+No broker available for partition leadership
+incident_id: INC1079
+resolution_notes: Recovered Kafka brokers, re-enabled idempotent producer retries, and drained the failed publisher queue
+severity: HIGH
+
+timestamp: 2026-01-11T00:12:00
+service_name: payment-service
+log_level: ERROR
+error_message: Database connection timeout while processing card charge after request_id=req-0080 from 10.10.9.14
+stack_trace: DBConnectionTimeoutException at PaymentRepository.save
+Caused by socket timeout to primary postgres
+incident_id: INC1080
+resolution_notes: Restarted PostgreSQL service, increased connection timeout, and tuned pool saturation thresholds
+severity: HIGH
+
+timestamp: 2026-01-11T03:13:00
+service_name: auth-service
+log_level: ERROR
+error_message: JWT token signature validation failed for access token trace_id=abc0081 user impact observed in region ap-south-1
+stack_trace: TokenValidationException at AuthMiddleware.verify
+Issuer mismatch on rotated public key
+incident_id: INC1081
+resolution_notes: Rotated the expired signing key, refreshed issuer metadata, and invalidated stale token cache entries
+severity: HIGH
+
+timestamp: 2026-01-11T06:14:00
+service_name: notification-service
+log_level: ERROR
+error_message: Kafka consumer lag exceeded threshold due to broker timeout correlation_id=flow-0082 detected by synthetic monitor
+stack_trace: KafkaTimeoutError at NotificationEventConsumer.poll
+Leader election in progress
+incident_id: INC1082
+resolution_notes: Recovered broker quorum, rebalanced the consumer group, and increased fetch timeout settings
+severity: MEDIUM
+
+timestamp: 2026-01-11T09:15:00
+service_name: order-service
+log_level: ERROR
+error_message: Redis cache connection reset by peer during order lookup span_id=mesh-0083 observed during canary rollout
+stack_trace: RedisConnectionError at OrderCache.load
+Connection pool exhausted
+incident_id: INC1083
+resolution_notes: Restarted Redis primary, flushed the broken connection pool, and raised client pool limits
+severity: HIGH
+
+timestamp: 2026-01-11T12:16:00
+service_name: gateway-service
+log_level: WARNING
+error_message: CPU spike triggered upstream latency and circuit breaker fallback after request_id=req-0084 from 10.10.4.18
+stack_trace: GatewayOverloadException at UpstreamProxy.forward
+CPU usage exceeded 92 percent
+incident_id: INC1084
+resolution_notes: Scaled gateway replicas horizontally, enabled request shedding, and optimized expensive middleware
+severity: MEDIUM
+
+timestamp: 2026-01-11T15:00:00
+service_name: payment-service
+log_level: CRITICAL
+error_message: Memory leak detected in settlement worker causing pod eviction trace_id=abc0085 user impact observed in region ap-south-1
+stack_trace: OutOfMemoryError at SettlementAggregator.flush
+Heap retained orphaned transaction buffers
+incident_id: INC1085
+resolution_notes: Patched the leaking aggregator, reduced batch size, and rolled out a memory limit alert
+severity: CRITICAL
+
+timestamp: 2026-01-11T18:01:00
+service_name: gateway-service
+log_level: ERROR
+error_message: Network timeout to upstream order service over internal mesh correlation_id=flow-0086 detected by synthetic monitor
+stack_trace: SocketTimeoutException at MeshClient.execute
+Retries exhausted after packet loss
+incident_id: INC1086
+resolution_notes: Repaired the mesh sidecar routing rule, restored east-west connectivity, and tuned retry backoff
+severity: HIGH
+
+timestamp: 2026-01-11T21:02:00
+service_name: auth-service
+log_level: ERROR
+error_message: OAuth refresh token store unavailable due to database lock contention span_id=mesh-0087 observed during canary rollout
+stack_trace: DatabaseLockException at RefreshTokenRepository.update
+Deadlock found when trying to get lock
+incident_id: INC1087
+resolution_notes: Killed the blocking transaction, added index coverage, and reduced refresh token update contention
+severity: HIGH
+
+timestamp: 2026-01-12T00:03:00
+service_name: notification-service
+log_level: ERROR
+error_message: SMTP gateway unreachable during notification dispatch after request_id=req-0088 from 10.10.8.22
+stack_trace: NotificationDeliveryException at EmailSender.send
+Connection refused by relay host
+incident_id: INC1088
+resolution_notes: Failed over to the backup relay, updated the egress firewall rule, and lowered SMTP connection reuse
+severity: MEDIUM
+
+timestamp: 2026-01-12T03:04:00
+service_name: order-service
+log_level: ERROR
+error_message: Kafka producer retry exhaustion while publishing order-created event trace_id=abc0089 user impact observed in region ap-south-1
+stack_trace: KafkaPublishException at OrderPublisher.emit
+No broker available for partition leadership
+incident_id: INC1089
+resolution_notes: Recovered Kafka brokers, re-enabled idempotent producer retries, and drained the failed publisher queue
+severity: HIGH
+
+timestamp: 2026-01-12T06:05:00
+service_name: payment-service
+log_level: ERROR
+error_message: Database connection timeout while processing card charge correlation_id=flow-0090 detected by synthetic monitor
+stack_trace: DBConnectionTimeoutException at PaymentRepository.save
+Caused by socket timeout to primary postgres
+incident_id: INC1090
+resolution_notes: Restarted PostgreSQL service, increased connection timeout, and tuned pool saturation thresholds
+severity: HIGH
+
+timestamp: 2026-01-12T09:06:00
+service_name: auth-service
+log_level: ERROR
+error_message: JWT token signature validation failed for access token span_id=mesh-0091 observed during canary rollout
+stack_trace: TokenValidationException at AuthMiddleware.verify
+Issuer mismatch on rotated public key
+incident_id: INC1091
+resolution_notes: Rotated the expired signing key, refreshed issuer metadata, and invalidated stale token cache entries
+severity: HIGH
+
+timestamp: 2026-01-12T12:07:00
+service_name: notification-service
+log_level: ERROR
+error_message: Kafka consumer lag exceeded threshold due to broker timeout after request_id=req-0092 from 10.10.3.26
+stack_trace: KafkaTimeoutError at NotificationEventConsumer.poll
+Leader election in progress
+incident_id: INC1092
+resolution_notes: Recovered broker quorum, rebalanced the consumer group, and increased fetch timeout settings
+severity: MEDIUM
+
+timestamp: 2026-01-12T15:08:00
+service_name: order-service
+log_level: ERROR
+error_message: Redis cache connection reset by peer during order lookup trace_id=abc0093 user impact observed in region ap-south-1
+stack_trace: RedisConnectionError at OrderCache.load
+Connection pool exhausted
+incident_id: INC1093
+resolution_notes: Restarted Redis primary, flushed the broken connection pool, and raised client pool limits
+severity: HIGH
+
+timestamp: 2026-01-12T18:09:00
+service_name: gateway-service
+log_level: WARNING
+error_message: CPU spike triggered upstream latency and circuit breaker fallback correlation_id=flow-0094 detected by synthetic monitor
+stack_trace: GatewayOverloadException at UpstreamProxy.forward
+CPU usage exceeded 92 percent
+incident_id: INC1094
+resolution_notes: Scaled gateway replicas horizontally, enabled request shedding, and optimized expensive middleware
+severity: MEDIUM
+
+timestamp: 2026-01-12T21:10:00
+service_name: payment-service
+log_level: CRITICAL
+error_message: Memory leak detected in settlement worker causing pod eviction span_id=mesh-0095 observed during canary rollout
+stack_trace: OutOfMemoryError at SettlementAggregator.flush
+Heap retained orphaned transaction buffers
+incident_id: INC1095
+resolution_notes: Patched the leaking aggregator, reduced batch size, and rolled out a memory limit alert
+severity: CRITICAL
+
+timestamp: 2026-01-13T00:11:00
+service_name: gateway-service
+log_level: ERROR
+error_message: Network timeout to upstream order service over internal mesh after request_id=req-0096 from 10.10.7.11
+stack_trace: SocketTimeoutException at MeshClient.execute
+Retries exhausted after packet loss
+incident_id: INC1096
+resolution_notes: Repaired the mesh sidecar routing rule, restored east-west connectivity, and tuned retry backoff
+severity: HIGH
+
+timestamp: 2026-01-13T03:12:00
+service_name: auth-service
+log_level: ERROR
+error_message: OAuth refresh token store unavailable due to database lock contention trace_id=abc0097 user impact observed in region ap-south-1
+stack_trace: DatabaseLockException at RefreshTokenRepository.update
+Deadlock found when trying to get lock
+incident_id: INC1097
+resolution_notes: Killed the blocking transaction, added index coverage, and reduced refresh token update contention
+severity: HIGH
+
+timestamp: 2026-01-13T06:13:00
+service_name: notification-service
+log_level: ERROR
+error_message: SMTP gateway unreachable during notification dispatch correlation_id=flow-0098 detected by synthetic monitor
+stack_trace: NotificationDeliveryException at EmailSender.send
+Connection refused by relay host
+incident_id: INC1098
+resolution_notes: Failed over to the backup relay, updated the egress firewall rule, and lowered SMTP connection reuse
+severity: MEDIUM
+
+timestamp: 2026-01-13T09:14:00
+service_name: order-service
+log_level: ERROR
+error_message: Kafka producer retry exhaustion while publishing order-created event span_id=mesh-0099 observed during canary rollout
+stack_trace: KafkaPublishException at OrderPublisher.emit
+No broker available for partition leadership
+incident_id: INC1099
+resolution_notes: Recovered Kafka brokers, re-enabled idempotent producer retries, and drained the failed publisher queue
+severity: HIGH

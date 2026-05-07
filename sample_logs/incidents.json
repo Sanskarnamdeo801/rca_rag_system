@@ -1,0 +1,1402 @@
+[
+  {
+    "service_name": "payment-service",
+    "log_level": "ERROR",
+    "error_message": "Database connection timeout while processing card charge after request_id=req-0000 from 10.10.1.10",
+    "stack_trace": "DBConnectionTimeoutException at PaymentRepository.save\nCaused by socket timeout to primary postgres",
+    "resolution_notes": "Restarted PostgreSQL service, increased connection timeout, and tuned pool saturation thresholds",
+    "severity": "HIGH",
+    "timestamp": "2026-01-01T00:00:00",
+    "incident_id": "INC1000",
+    "tags": [
+      "payment",
+      "high"
+    ]
+  },
+  {
+    "service_name": "auth-service",
+    "log_level": "ERROR",
+    "error_message": "JWT token signature validation failed for access token trace_id=abc0001 user impact observed in region ap-south-1",
+    "stack_trace": "TokenValidationException at AuthMiddleware.verify\nIssuer mismatch on rotated public key",
+    "resolution_notes": "Rotated the expired signing key, refreshed issuer metadata, and invalidated stale token cache entries",
+    "severity": "HIGH",
+    "timestamp": "2026-01-01T03:01:00",
+    "incident_id": "INC1001",
+    "tags": [
+      "auth",
+      "high"
+    ]
+  },
+  {
+    "service_name": "notification-service",
+    "log_level": "ERROR",
+    "error_message": "Kafka consumer lag exceeded threshold due to broker timeout correlation_id=flow-0002 detected by synthetic monitor",
+    "stack_trace": "KafkaTimeoutError at NotificationEventConsumer.poll\nLeader election in progress",
+    "resolution_notes": "Recovered broker quorum, rebalanced the consumer group, and increased fetch timeout settings",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-01T06:02:00",
+    "incident_id": "INC1002",
+    "tags": [
+      "notification",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "order-service",
+    "log_level": "ERROR",
+    "error_message": "Redis cache connection reset by peer during order lookup span_id=mesh-0003 observed during canary rollout",
+    "stack_trace": "RedisConnectionError at OrderCache.load\nConnection pool exhausted",
+    "resolution_notes": "Restarted Redis primary, flushed the broken connection pool, and raised client pool limits",
+    "severity": "HIGH",
+    "timestamp": "2026-01-01T09:03:00",
+    "incident_id": "INC1003",
+    "tags": [
+      "order",
+      "high"
+    ]
+  },
+  {
+    "service_name": "gateway-service",
+    "log_level": "WARNING",
+    "error_message": "CPU spike triggered upstream latency and circuit breaker fallback after request_id=req-0004 from 10.10.5.14",
+    "stack_trace": "GatewayOverloadException at UpstreamProxy.forward\nCPU usage exceeded 92 percent",
+    "resolution_notes": "Scaled gateway replicas horizontally, enabled request shedding, and optimized expensive middleware",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-01T12:04:00",
+    "incident_id": "INC1004",
+    "tags": [
+      "gateway",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "payment-service",
+    "log_level": "CRITICAL",
+    "error_message": "Memory leak detected in settlement worker causing pod eviction trace_id=abc0005 user impact observed in region ap-south-1",
+    "stack_trace": "OutOfMemoryError at SettlementAggregator.flush\nHeap retained orphaned transaction buffers",
+    "resolution_notes": "Patched the leaking aggregator, reduced batch size, and rolled out a memory limit alert",
+    "severity": "CRITICAL",
+    "timestamp": "2026-01-01T15:05:00",
+    "incident_id": "INC1005",
+    "tags": [
+      "payment",
+      "critical"
+    ]
+  },
+  {
+    "service_name": "gateway-service",
+    "log_level": "ERROR",
+    "error_message": "Network timeout to upstream order service over internal mesh correlation_id=flow-0006 detected by synthetic monitor",
+    "stack_trace": "SocketTimeoutException at MeshClient.execute\nRetries exhausted after packet loss",
+    "resolution_notes": "Repaired the mesh sidecar routing rule, restored east-west connectivity, and tuned retry backoff",
+    "severity": "HIGH",
+    "timestamp": "2026-01-01T18:06:00",
+    "incident_id": "INC1006",
+    "tags": [
+      "gateway",
+      "high"
+    ]
+  },
+  {
+    "service_name": "auth-service",
+    "log_level": "ERROR",
+    "error_message": "OAuth refresh token store unavailable due to database lock contention span_id=mesh-0007 observed during canary rollout",
+    "stack_trace": "DatabaseLockException at RefreshTokenRepository.update\nDeadlock found when trying to get lock",
+    "resolution_notes": "Killed the blocking transaction, added index coverage, and reduced refresh token update contention",
+    "severity": "HIGH",
+    "timestamp": "2026-01-01T21:07:00",
+    "incident_id": "INC1007",
+    "tags": [
+      "auth",
+      "high"
+    ]
+  },
+  {
+    "service_name": "notification-service",
+    "log_level": "ERROR",
+    "error_message": "SMTP gateway unreachable during notification dispatch after request_id=req-0008 from 10.10.9.18",
+    "stack_trace": "NotificationDeliveryException at EmailSender.send\nConnection refused by relay host",
+    "resolution_notes": "Failed over to the backup relay, updated the egress firewall rule, and lowered SMTP connection reuse",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-02T00:08:00",
+    "incident_id": "INC1008",
+    "tags": [
+      "notification",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "order-service",
+    "log_level": "ERROR",
+    "error_message": "Kafka producer retry exhaustion while publishing order-created event trace_id=abc0009 user impact observed in region ap-south-1",
+    "stack_trace": "KafkaPublishException at OrderPublisher.emit\nNo broker available for partition leadership",
+    "resolution_notes": "Recovered Kafka brokers, re-enabled idempotent producer retries, and drained the failed publisher queue",
+    "severity": "HIGH",
+    "timestamp": "2026-01-02T03:09:00",
+    "incident_id": "INC1009",
+    "tags": [
+      "order",
+      "high"
+    ]
+  },
+  {
+    "service_name": "payment-service",
+    "log_level": "ERROR",
+    "error_message": "Database connection timeout while processing card charge correlation_id=flow-0010 detected by synthetic monitor",
+    "stack_trace": "DBConnectionTimeoutException at PaymentRepository.save\nCaused by socket timeout to primary postgres",
+    "resolution_notes": "Restarted PostgreSQL service, increased connection timeout, and tuned pool saturation thresholds",
+    "severity": "HIGH",
+    "timestamp": "2026-01-02T06:10:00",
+    "incident_id": "INC1010",
+    "tags": [
+      "payment",
+      "high"
+    ]
+  },
+  {
+    "service_name": "auth-service",
+    "log_level": "ERROR",
+    "error_message": "JWT token signature validation failed for access token span_id=mesh-0011 observed during canary rollout",
+    "stack_trace": "TokenValidationException at AuthMiddleware.verify\nIssuer mismatch on rotated public key",
+    "resolution_notes": "Rotated the expired signing key, refreshed issuer metadata, and invalidated stale token cache entries",
+    "severity": "HIGH",
+    "timestamp": "2026-01-02T09:11:00",
+    "incident_id": "INC1011",
+    "tags": [
+      "auth",
+      "high"
+    ]
+  },
+  {
+    "service_name": "notification-service",
+    "log_level": "ERROR",
+    "error_message": "Kafka consumer lag exceeded threshold due to broker timeout after request_id=req-0012 from 10.10.4.22",
+    "stack_trace": "KafkaTimeoutError at NotificationEventConsumer.poll\nLeader election in progress",
+    "resolution_notes": "Recovered broker quorum, rebalanced the consumer group, and increased fetch timeout settings",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-02T12:12:00",
+    "incident_id": "INC1012",
+    "tags": [
+      "notification",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "order-service",
+    "log_level": "ERROR",
+    "error_message": "Redis cache connection reset by peer during order lookup trace_id=abc0013 user impact observed in region ap-south-1",
+    "stack_trace": "RedisConnectionError at OrderCache.load\nConnection pool exhausted",
+    "resolution_notes": "Restarted Redis primary, flushed the broken connection pool, and raised client pool limits",
+    "severity": "HIGH",
+    "timestamp": "2026-01-02T15:13:00",
+    "incident_id": "INC1013",
+    "tags": [
+      "order",
+      "high"
+    ]
+  },
+  {
+    "service_name": "gateway-service",
+    "log_level": "WARNING",
+    "error_message": "CPU spike triggered upstream latency and circuit breaker fallback correlation_id=flow-0014 detected by synthetic monitor",
+    "stack_trace": "GatewayOverloadException at UpstreamProxy.forward\nCPU usage exceeded 92 percent",
+    "resolution_notes": "Scaled gateway replicas horizontally, enabled request shedding, and optimized expensive middleware",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-02T18:14:00",
+    "incident_id": "INC1014",
+    "tags": [
+      "gateway",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "payment-service",
+    "log_level": "CRITICAL",
+    "error_message": "Memory leak detected in settlement worker causing pod eviction span_id=mesh-0015 observed during canary rollout",
+    "stack_trace": "OutOfMemoryError at SettlementAggregator.flush\nHeap retained orphaned transaction buffers",
+    "resolution_notes": "Patched the leaking aggregator, reduced batch size, and rolled out a memory limit alert",
+    "severity": "CRITICAL",
+    "timestamp": "2026-01-02T21:15:00",
+    "incident_id": "INC1015",
+    "tags": [
+      "payment",
+      "critical"
+    ]
+  },
+  {
+    "service_name": "gateway-service",
+    "log_level": "ERROR",
+    "error_message": "Network timeout to upstream order service over internal mesh after request_id=req-0016 from 10.10.8.26",
+    "stack_trace": "SocketTimeoutException at MeshClient.execute\nRetries exhausted after packet loss",
+    "resolution_notes": "Repaired the mesh sidecar routing rule, restored east-west connectivity, and tuned retry backoff",
+    "severity": "HIGH",
+    "timestamp": "2026-01-03T00:16:00",
+    "incident_id": "INC1016",
+    "tags": [
+      "gateway",
+      "high"
+    ]
+  },
+  {
+    "service_name": "auth-service",
+    "log_level": "ERROR",
+    "error_message": "OAuth refresh token store unavailable due to database lock contention trace_id=abc0017 user impact observed in region ap-south-1",
+    "stack_trace": "DatabaseLockException at RefreshTokenRepository.update\nDeadlock found when trying to get lock",
+    "resolution_notes": "Killed the blocking transaction, added index coverage, and reduced refresh token update contention",
+    "severity": "HIGH",
+    "timestamp": "2026-01-03T03:00:00",
+    "incident_id": "INC1017",
+    "tags": [
+      "auth",
+      "high"
+    ]
+  },
+  {
+    "service_name": "notification-service",
+    "log_level": "ERROR",
+    "error_message": "SMTP gateway unreachable during notification dispatch correlation_id=flow-0018 detected by synthetic monitor",
+    "stack_trace": "NotificationDeliveryException at EmailSender.send\nConnection refused by relay host",
+    "resolution_notes": "Failed over to the backup relay, updated the egress firewall rule, and lowered SMTP connection reuse",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-03T06:01:00",
+    "incident_id": "INC1018",
+    "tags": [
+      "notification",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "order-service",
+    "log_level": "ERROR",
+    "error_message": "Kafka producer retry exhaustion while publishing order-created event span_id=mesh-0019 observed during canary rollout",
+    "stack_trace": "KafkaPublishException at OrderPublisher.emit\nNo broker available for partition leadership",
+    "resolution_notes": "Recovered Kafka brokers, re-enabled idempotent producer retries, and drained the failed publisher queue",
+    "severity": "HIGH",
+    "timestamp": "2026-01-03T09:02:00",
+    "incident_id": "INC1019",
+    "tags": [
+      "order",
+      "high"
+    ]
+  },
+  {
+    "service_name": "payment-service",
+    "log_level": "ERROR",
+    "error_message": "Database connection timeout while processing card charge after request_id=req-0020 from 10.10.3.11",
+    "stack_trace": "DBConnectionTimeoutException at PaymentRepository.save\nCaused by socket timeout to primary postgres",
+    "resolution_notes": "Restarted PostgreSQL service, increased connection timeout, and tuned pool saturation thresholds",
+    "severity": "HIGH",
+    "timestamp": "2026-01-03T12:03:00",
+    "incident_id": "INC1020",
+    "tags": [
+      "payment",
+      "high"
+    ]
+  },
+  {
+    "service_name": "auth-service",
+    "log_level": "ERROR",
+    "error_message": "JWT token signature validation failed for access token trace_id=abc0021 user impact observed in region ap-south-1",
+    "stack_trace": "TokenValidationException at AuthMiddleware.verify\nIssuer mismatch on rotated public key",
+    "resolution_notes": "Rotated the expired signing key, refreshed issuer metadata, and invalidated stale token cache entries",
+    "severity": "HIGH",
+    "timestamp": "2026-01-03T15:04:00",
+    "incident_id": "INC1021",
+    "tags": [
+      "auth",
+      "high"
+    ]
+  },
+  {
+    "service_name": "notification-service",
+    "log_level": "ERROR",
+    "error_message": "Kafka consumer lag exceeded threshold due to broker timeout correlation_id=flow-0022 detected by synthetic monitor",
+    "stack_trace": "KafkaTimeoutError at NotificationEventConsumer.poll\nLeader election in progress",
+    "resolution_notes": "Recovered broker quorum, rebalanced the consumer group, and increased fetch timeout settings",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-03T18:05:00",
+    "incident_id": "INC1022",
+    "tags": [
+      "notification",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "order-service",
+    "log_level": "ERROR",
+    "error_message": "Redis cache connection reset by peer during order lookup span_id=mesh-0023 observed during canary rollout",
+    "stack_trace": "RedisConnectionError at OrderCache.load\nConnection pool exhausted",
+    "resolution_notes": "Restarted Redis primary, flushed the broken connection pool, and raised client pool limits",
+    "severity": "HIGH",
+    "timestamp": "2026-01-03T21:06:00",
+    "incident_id": "INC1023",
+    "tags": [
+      "order",
+      "high"
+    ]
+  },
+  {
+    "service_name": "gateway-service",
+    "log_level": "WARNING",
+    "error_message": "CPU spike triggered upstream latency and circuit breaker fallback after request_id=req-0024 from 10.10.7.15",
+    "stack_trace": "GatewayOverloadException at UpstreamProxy.forward\nCPU usage exceeded 92 percent",
+    "resolution_notes": "Scaled gateway replicas horizontally, enabled request shedding, and optimized expensive middleware",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-04T00:07:00",
+    "incident_id": "INC1024",
+    "tags": [
+      "gateway",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "payment-service",
+    "log_level": "CRITICAL",
+    "error_message": "Memory leak detected in settlement worker causing pod eviction trace_id=abc0025 user impact observed in region ap-south-1",
+    "stack_trace": "OutOfMemoryError at SettlementAggregator.flush\nHeap retained orphaned transaction buffers",
+    "resolution_notes": "Patched the leaking aggregator, reduced batch size, and rolled out a memory limit alert",
+    "severity": "CRITICAL",
+    "timestamp": "2026-01-04T03:08:00",
+    "incident_id": "INC1025",
+    "tags": [
+      "payment",
+      "critical"
+    ]
+  },
+  {
+    "service_name": "gateway-service",
+    "log_level": "ERROR",
+    "error_message": "Network timeout to upstream order service over internal mesh correlation_id=flow-0026 detected by synthetic monitor",
+    "stack_trace": "SocketTimeoutException at MeshClient.execute\nRetries exhausted after packet loss",
+    "resolution_notes": "Repaired the mesh sidecar routing rule, restored east-west connectivity, and tuned retry backoff",
+    "severity": "HIGH",
+    "timestamp": "2026-01-04T06:09:00",
+    "incident_id": "INC1026",
+    "tags": [
+      "gateway",
+      "high"
+    ]
+  },
+  {
+    "service_name": "auth-service",
+    "log_level": "ERROR",
+    "error_message": "OAuth refresh token store unavailable due to database lock contention span_id=mesh-0027 observed during canary rollout",
+    "stack_trace": "DatabaseLockException at RefreshTokenRepository.update\nDeadlock found when trying to get lock",
+    "resolution_notes": "Killed the blocking transaction, added index coverage, and reduced refresh token update contention",
+    "severity": "HIGH",
+    "timestamp": "2026-01-04T09:10:00",
+    "incident_id": "INC1027",
+    "tags": [
+      "auth",
+      "high"
+    ]
+  },
+  {
+    "service_name": "notification-service",
+    "log_level": "ERROR",
+    "error_message": "SMTP gateway unreachable during notification dispatch after request_id=req-0028 from 10.10.2.19",
+    "stack_trace": "NotificationDeliveryException at EmailSender.send\nConnection refused by relay host",
+    "resolution_notes": "Failed over to the backup relay, updated the egress firewall rule, and lowered SMTP connection reuse",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-04T12:11:00",
+    "incident_id": "INC1028",
+    "tags": [
+      "notification",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "order-service",
+    "log_level": "ERROR",
+    "error_message": "Kafka producer retry exhaustion while publishing order-created event trace_id=abc0029 user impact observed in region ap-south-1",
+    "stack_trace": "KafkaPublishException at OrderPublisher.emit\nNo broker available for partition leadership",
+    "resolution_notes": "Recovered Kafka brokers, re-enabled idempotent producer retries, and drained the failed publisher queue",
+    "severity": "HIGH",
+    "timestamp": "2026-01-04T15:12:00",
+    "incident_id": "INC1029",
+    "tags": [
+      "order",
+      "high"
+    ]
+  },
+  {
+    "service_name": "payment-service",
+    "log_level": "ERROR",
+    "error_message": "Database connection timeout while processing card charge correlation_id=flow-0030 detected by synthetic monitor",
+    "stack_trace": "DBConnectionTimeoutException at PaymentRepository.save\nCaused by socket timeout to primary postgres",
+    "resolution_notes": "Restarted PostgreSQL service, increased connection timeout, and tuned pool saturation thresholds",
+    "severity": "HIGH",
+    "timestamp": "2026-01-04T18:13:00",
+    "incident_id": "INC1030",
+    "tags": [
+      "payment",
+      "high"
+    ]
+  },
+  {
+    "service_name": "auth-service",
+    "log_level": "ERROR",
+    "error_message": "JWT token signature validation failed for access token span_id=mesh-0031 observed during canary rollout",
+    "stack_trace": "TokenValidationException at AuthMiddleware.verify\nIssuer mismatch on rotated public key",
+    "resolution_notes": "Rotated the expired signing key, refreshed issuer metadata, and invalidated stale token cache entries",
+    "severity": "HIGH",
+    "timestamp": "2026-01-04T21:14:00",
+    "incident_id": "INC1031",
+    "tags": [
+      "auth",
+      "high"
+    ]
+  },
+  {
+    "service_name": "notification-service",
+    "log_level": "ERROR",
+    "error_message": "Kafka consumer lag exceeded threshold due to broker timeout after request_id=req-0032 from 10.10.6.23",
+    "stack_trace": "KafkaTimeoutError at NotificationEventConsumer.poll\nLeader election in progress",
+    "resolution_notes": "Recovered broker quorum, rebalanced the consumer group, and increased fetch timeout settings",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-05T00:15:00",
+    "incident_id": "INC1032",
+    "tags": [
+      "notification",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "order-service",
+    "log_level": "ERROR",
+    "error_message": "Redis cache connection reset by peer during order lookup trace_id=abc0033 user impact observed in region ap-south-1",
+    "stack_trace": "RedisConnectionError at OrderCache.load\nConnection pool exhausted",
+    "resolution_notes": "Restarted Redis primary, flushed the broken connection pool, and raised client pool limits",
+    "severity": "HIGH",
+    "timestamp": "2026-01-05T03:16:00",
+    "incident_id": "INC1033",
+    "tags": [
+      "order",
+      "high"
+    ]
+  },
+  {
+    "service_name": "gateway-service",
+    "log_level": "WARNING",
+    "error_message": "CPU spike triggered upstream latency and circuit breaker fallback correlation_id=flow-0034 detected by synthetic monitor",
+    "stack_trace": "GatewayOverloadException at UpstreamProxy.forward\nCPU usage exceeded 92 percent",
+    "resolution_notes": "Scaled gateway replicas horizontally, enabled request shedding, and optimized expensive middleware",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-05T06:00:00",
+    "incident_id": "INC1034",
+    "tags": [
+      "gateway",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "payment-service",
+    "log_level": "CRITICAL",
+    "error_message": "Memory leak detected in settlement worker causing pod eviction span_id=mesh-0035 observed during canary rollout",
+    "stack_trace": "OutOfMemoryError at SettlementAggregator.flush\nHeap retained orphaned transaction buffers",
+    "resolution_notes": "Patched the leaking aggregator, reduced batch size, and rolled out a memory limit alert",
+    "severity": "CRITICAL",
+    "timestamp": "2026-01-05T09:01:00",
+    "incident_id": "INC1035",
+    "tags": [
+      "payment",
+      "critical"
+    ]
+  },
+  {
+    "service_name": "gateway-service",
+    "log_level": "ERROR",
+    "error_message": "Network timeout to upstream order service over internal mesh after request_id=req-0036 from 10.10.1.27",
+    "stack_trace": "SocketTimeoutException at MeshClient.execute\nRetries exhausted after packet loss",
+    "resolution_notes": "Repaired the mesh sidecar routing rule, restored east-west connectivity, and tuned retry backoff",
+    "severity": "HIGH",
+    "timestamp": "2026-01-05T12:02:00",
+    "incident_id": "INC1036",
+    "tags": [
+      "gateway",
+      "high"
+    ]
+  },
+  {
+    "service_name": "auth-service",
+    "log_level": "ERROR",
+    "error_message": "OAuth refresh token store unavailable due to database lock contention trace_id=abc0037 user impact observed in region ap-south-1",
+    "stack_trace": "DatabaseLockException at RefreshTokenRepository.update\nDeadlock found when trying to get lock",
+    "resolution_notes": "Killed the blocking transaction, added index coverage, and reduced refresh token update contention",
+    "severity": "HIGH",
+    "timestamp": "2026-01-05T15:03:00",
+    "incident_id": "INC1037",
+    "tags": [
+      "auth",
+      "high"
+    ]
+  },
+  {
+    "service_name": "notification-service",
+    "log_level": "ERROR",
+    "error_message": "SMTP gateway unreachable during notification dispatch correlation_id=flow-0038 detected by synthetic monitor",
+    "stack_trace": "NotificationDeliveryException at EmailSender.send\nConnection refused by relay host",
+    "resolution_notes": "Failed over to the backup relay, updated the egress firewall rule, and lowered SMTP connection reuse",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-05T18:04:00",
+    "incident_id": "INC1038",
+    "tags": [
+      "notification",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "order-service",
+    "log_level": "ERROR",
+    "error_message": "Kafka producer retry exhaustion while publishing order-created event span_id=mesh-0039 observed during canary rollout",
+    "stack_trace": "KafkaPublishException at OrderPublisher.emit\nNo broker available for partition leadership",
+    "resolution_notes": "Recovered Kafka brokers, re-enabled idempotent producer retries, and drained the failed publisher queue",
+    "severity": "HIGH",
+    "timestamp": "2026-01-05T21:05:00",
+    "incident_id": "INC1039",
+    "tags": [
+      "order",
+      "high"
+    ]
+  },
+  {
+    "service_name": "payment-service",
+    "log_level": "ERROR",
+    "error_message": "Database connection timeout while processing card charge after request_id=req-0040 from 10.10.5.12",
+    "stack_trace": "DBConnectionTimeoutException at PaymentRepository.save\nCaused by socket timeout to primary postgres",
+    "resolution_notes": "Restarted PostgreSQL service, increased connection timeout, and tuned pool saturation thresholds",
+    "severity": "HIGH",
+    "timestamp": "2026-01-06T00:06:00",
+    "incident_id": "INC1040",
+    "tags": [
+      "payment",
+      "high"
+    ]
+  },
+  {
+    "service_name": "auth-service",
+    "log_level": "ERROR",
+    "error_message": "JWT token signature validation failed for access token trace_id=abc0041 user impact observed in region ap-south-1",
+    "stack_trace": "TokenValidationException at AuthMiddleware.verify\nIssuer mismatch on rotated public key",
+    "resolution_notes": "Rotated the expired signing key, refreshed issuer metadata, and invalidated stale token cache entries",
+    "severity": "HIGH",
+    "timestamp": "2026-01-06T03:07:00",
+    "incident_id": "INC1041",
+    "tags": [
+      "auth",
+      "high"
+    ]
+  },
+  {
+    "service_name": "notification-service",
+    "log_level": "ERROR",
+    "error_message": "Kafka consumer lag exceeded threshold due to broker timeout correlation_id=flow-0042 detected by synthetic monitor",
+    "stack_trace": "KafkaTimeoutError at NotificationEventConsumer.poll\nLeader election in progress",
+    "resolution_notes": "Recovered broker quorum, rebalanced the consumer group, and increased fetch timeout settings",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-06T06:08:00",
+    "incident_id": "INC1042",
+    "tags": [
+      "notification",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "order-service",
+    "log_level": "ERROR",
+    "error_message": "Redis cache connection reset by peer during order lookup span_id=mesh-0043 observed during canary rollout",
+    "stack_trace": "RedisConnectionError at OrderCache.load\nConnection pool exhausted",
+    "resolution_notes": "Restarted Redis primary, flushed the broken connection pool, and raised client pool limits",
+    "severity": "HIGH",
+    "timestamp": "2026-01-06T09:09:00",
+    "incident_id": "INC1043",
+    "tags": [
+      "order",
+      "high"
+    ]
+  },
+  {
+    "service_name": "gateway-service",
+    "log_level": "WARNING",
+    "error_message": "CPU spike triggered upstream latency and circuit breaker fallback after request_id=req-0044 from 10.10.9.16",
+    "stack_trace": "GatewayOverloadException at UpstreamProxy.forward\nCPU usage exceeded 92 percent",
+    "resolution_notes": "Scaled gateway replicas horizontally, enabled request shedding, and optimized expensive middleware",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-06T12:10:00",
+    "incident_id": "INC1044",
+    "tags": [
+      "gateway",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "payment-service",
+    "log_level": "CRITICAL",
+    "error_message": "Memory leak detected in settlement worker causing pod eviction trace_id=abc0045 user impact observed in region ap-south-1",
+    "stack_trace": "OutOfMemoryError at SettlementAggregator.flush\nHeap retained orphaned transaction buffers",
+    "resolution_notes": "Patched the leaking aggregator, reduced batch size, and rolled out a memory limit alert",
+    "severity": "CRITICAL",
+    "timestamp": "2026-01-06T15:11:00",
+    "incident_id": "INC1045",
+    "tags": [
+      "payment",
+      "critical"
+    ]
+  },
+  {
+    "service_name": "gateway-service",
+    "log_level": "ERROR",
+    "error_message": "Network timeout to upstream order service over internal mesh correlation_id=flow-0046 detected by synthetic monitor",
+    "stack_trace": "SocketTimeoutException at MeshClient.execute\nRetries exhausted after packet loss",
+    "resolution_notes": "Repaired the mesh sidecar routing rule, restored east-west connectivity, and tuned retry backoff",
+    "severity": "HIGH",
+    "timestamp": "2026-01-06T18:12:00",
+    "incident_id": "INC1046",
+    "tags": [
+      "gateway",
+      "high"
+    ]
+  },
+  {
+    "service_name": "auth-service",
+    "log_level": "ERROR",
+    "error_message": "OAuth refresh token store unavailable due to database lock contention span_id=mesh-0047 observed during canary rollout",
+    "stack_trace": "DatabaseLockException at RefreshTokenRepository.update\nDeadlock found when trying to get lock",
+    "resolution_notes": "Killed the blocking transaction, added index coverage, and reduced refresh token update contention",
+    "severity": "HIGH",
+    "timestamp": "2026-01-06T21:13:00",
+    "incident_id": "INC1047",
+    "tags": [
+      "auth",
+      "high"
+    ]
+  },
+  {
+    "service_name": "notification-service",
+    "log_level": "ERROR",
+    "error_message": "SMTP gateway unreachable during notification dispatch after request_id=req-0048 from 10.10.4.20",
+    "stack_trace": "NotificationDeliveryException at EmailSender.send\nConnection refused by relay host",
+    "resolution_notes": "Failed over to the backup relay, updated the egress firewall rule, and lowered SMTP connection reuse",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-07T00:14:00",
+    "incident_id": "INC1048",
+    "tags": [
+      "notification",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "order-service",
+    "log_level": "ERROR",
+    "error_message": "Kafka producer retry exhaustion while publishing order-created event trace_id=abc0049 user impact observed in region ap-south-1",
+    "stack_trace": "KafkaPublishException at OrderPublisher.emit\nNo broker available for partition leadership",
+    "resolution_notes": "Recovered Kafka brokers, re-enabled idempotent producer retries, and drained the failed publisher queue",
+    "severity": "HIGH",
+    "timestamp": "2026-01-07T03:15:00",
+    "incident_id": "INC1049",
+    "tags": [
+      "order",
+      "high"
+    ]
+  },
+  {
+    "service_name": "payment-service",
+    "log_level": "ERROR",
+    "error_message": "Database connection timeout while processing card charge correlation_id=flow-0050 detected by synthetic monitor",
+    "stack_trace": "DBConnectionTimeoutException at PaymentRepository.save\nCaused by socket timeout to primary postgres",
+    "resolution_notes": "Restarted PostgreSQL service, increased connection timeout, and tuned pool saturation thresholds",
+    "severity": "HIGH",
+    "timestamp": "2026-01-07T06:16:00",
+    "incident_id": "INC1050",
+    "tags": [
+      "payment",
+      "high"
+    ]
+  },
+  {
+    "service_name": "auth-service",
+    "log_level": "ERROR",
+    "error_message": "JWT token signature validation failed for access token span_id=mesh-0051 observed during canary rollout",
+    "stack_trace": "TokenValidationException at AuthMiddleware.verify\nIssuer mismatch on rotated public key",
+    "resolution_notes": "Rotated the expired signing key, refreshed issuer metadata, and invalidated stale token cache entries",
+    "severity": "HIGH",
+    "timestamp": "2026-01-07T09:00:00",
+    "incident_id": "INC1051",
+    "tags": [
+      "auth",
+      "high"
+    ]
+  },
+  {
+    "service_name": "notification-service",
+    "log_level": "ERROR",
+    "error_message": "Kafka consumer lag exceeded threshold due to broker timeout after request_id=req-0052 from 10.10.8.24",
+    "stack_trace": "KafkaTimeoutError at NotificationEventConsumer.poll\nLeader election in progress",
+    "resolution_notes": "Recovered broker quorum, rebalanced the consumer group, and increased fetch timeout settings",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-07T12:01:00",
+    "incident_id": "INC1052",
+    "tags": [
+      "notification",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "order-service",
+    "log_level": "ERROR",
+    "error_message": "Redis cache connection reset by peer during order lookup trace_id=abc0053 user impact observed in region ap-south-1",
+    "stack_trace": "RedisConnectionError at OrderCache.load\nConnection pool exhausted",
+    "resolution_notes": "Restarted Redis primary, flushed the broken connection pool, and raised client pool limits",
+    "severity": "HIGH",
+    "timestamp": "2026-01-07T15:02:00",
+    "incident_id": "INC1053",
+    "tags": [
+      "order",
+      "high"
+    ]
+  },
+  {
+    "service_name": "gateway-service",
+    "log_level": "WARNING",
+    "error_message": "CPU spike triggered upstream latency and circuit breaker fallback correlation_id=flow-0054 detected by synthetic monitor",
+    "stack_trace": "GatewayOverloadException at UpstreamProxy.forward\nCPU usage exceeded 92 percent",
+    "resolution_notes": "Scaled gateway replicas horizontally, enabled request shedding, and optimized expensive middleware",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-07T18:03:00",
+    "incident_id": "INC1054",
+    "tags": [
+      "gateway",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "payment-service",
+    "log_level": "CRITICAL",
+    "error_message": "Memory leak detected in settlement worker causing pod eviction span_id=mesh-0055 observed during canary rollout",
+    "stack_trace": "OutOfMemoryError at SettlementAggregator.flush\nHeap retained orphaned transaction buffers",
+    "resolution_notes": "Patched the leaking aggregator, reduced batch size, and rolled out a memory limit alert",
+    "severity": "CRITICAL",
+    "timestamp": "2026-01-07T21:04:00",
+    "incident_id": "INC1055",
+    "tags": [
+      "payment",
+      "critical"
+    ]
+  },
+  {
+    "service_name": "gateway-service",
+    "log_level": "ERROR",
+    "error_message": "Network timeout to upstream order service over internal mesh after request_id=req-0056 from 10.10.3.28",
+    "stack_trace": "SocketTimeoutException at MeshClient.execute\nRetries exhausted after packet loss",
+    "resolution_notes": "Repaired the mesh sidecar routing rule, restored east-west connectivity, and tuned retry backoff",
+    "severity": "HIGH",
+    "timestamp": "2026-01-08T00:05:00",
+    "incident_id": "INC1056",
+    "tags": [
+      "gateway",
+      "high"
+    ]
+  },
+  {
+    "service_name": "auth-service",
+    "log_level": "ERROR",
+    "error_message": "OAuth refresh token store unavailable due to database lock contention trace_id=abc0057 user impact observed in region ap-south-1",
+    "stack_trace": "DatabaseLockException at RefreshTokenRepository.update\nDeadlock found when trying to get lock",
+    "resolution_notes": "Killed the blocking transaction, added index coverage, and reduced refresh token update contention",
+    "severity": "HIGH",
+    "timestamp": "2026-01-08T03:06:00",
+    "incident_id": "INC1057",
+    "tags": [
+      "auth",
+      "high"
+    ]
+  },
+  {
+    "service_name": "notification-service",
+    "log_level": "ERROR",
+    "error_message": "SMTP gateway unreachable during notification dispatch correlation_id=flow-0058 detected by synthetic monitor",
+    "stack_trace": "NotificationDeliveryException at EmailSender.send\nConnection refused by relay host",
+    "resolution_notes": "Failed over to the backup relay, updated the egress firewall rule, and lowered SMTP connection reuse",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-08T06:07:00",
+    "incident_id": "INC1058",
+    "tags": [
+      "notification",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "order-service",
+    "log_level": "ERROR",
+    "error_message": "Kafka producer retry exhaustion while publishing order-created event span_id=mesh-0059 observed during canary rollout",
+    "stack_trace": "KafkaPublishException at OrderPublisher.emit\nNo broker available for partition leadership",
+    "resolution_notes": "Recovered Kafka brokers, re-enabled idempotent producer retries, and drained the failed publisher queue",
+    "severity": "HIGH",
+    "timestamp": "2026-01-08T09:08:00",
+    "incident_id": "INC1059",
+    "tags": [
+      "order",
+      "high"
+    ]
+  },
+  {
+    "service_name": "payment-service",
+    "log_level": "ERROR",
+    "error_message": "Database connection timeout while processing card charge after request_id=req-0060 from 10.10.7.13",
+    "stack_trace": "DBConnectionTimeoutException at PaymentRepository.save\nCaused by socket timeout to primary postgres",
+    "resolution_notes": "Restarted PostgreSQL service, increased connection timeout, and tuned pool saturation thresholds",
+    "severity": "HIGH",
+    "timestamp": "2026-01-08T12:09:00",
+    "incident_id": "INC1060",
+    "tags": [
+      "payment",
+      "high"
+    ]
+  },
+  {
+    "service_name": "auth-service",
+    "log_level": "ERROR",
+    "error_message": "JWT token signature validation failed for access token trace_id=abc0061 user impact observed in region ap-south-1",
+    "stack_trace": "TokenValidationException at AuthMiddleware.verify\nIssuer mismatch on rotated public key",
+    "resolution_notes": "Rotated the expired signing key, refreshed issuer metadata, and invalidated stale token cache entries",
+    "severity": "HIGH",
+    "timestamp": "2026-01-08T15:10:00",
+    "incident_id": "INC1061",
+    "tags": [
+      "auth",
+      "high"
+    ]
+  },
+  {
+    "service_name": "notification-service",
+    "log_level": "ERROR",
+    "error_message": "Kafka consumer lag exceeded threshold due to broker timeout correlation_id=flow-0062 detected by synthetic monitor",
+    "stack_trace": "KafkaTimeoutError at NotificationEventConsumer.poll\nLeader election in progress",
+    "resolution_notes": "Recovered broker quorum, rebalanced the consumer group, and increased fetch timeout settings",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-08T18:11:00",
+    "incident_id": "INC1062",
+    "tags": [
+      "notification",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "order-service",
+    "log_level": "ERROR",
+    "error_message": "Redis cache connection reset by peer during order lookup span_id=mesh-0063 observed during canary rollout",
+    "stack_trace": "RedisConnectionError at OrderCache.load\nConnection pool exhausted",
+    "resolution_notes": "Restarted Redis primary, flushed the broken connection pool, and raised client pool limits",
+    "severity": "HIGH",
+    "timestamp": "2026-01-08T21:12:00",
+    "incident_id": "INC1063",
+    "tags": [
+      "order",
+      "high"
+    ]
+  },
+  {
+    "service_name": "gateway-service",
+    "log_level": "WARNING",
+    "error_message": "CPU spike triggered upstream latency and circuit breaker fallback after request_id=req-0064 from 10.10.2.17",
+    "stack_trace": "GatewayOverloadException at UpstreamProxy.forward\nCPU usage exceeded 92 percent",
+    "resolution_notes": "Scaled gateway replicas horizontally, enabled request shedding, and optimized expensive middleware",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-09T00:13:00",
+    "incident_id": "INC1064",
+    "tags": [
+      "gateway",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "payment-service",
+    "log_level": "CRITICAL",
+    "error_message": "Memory leak detected in settlement worker causing pod eviction trace_id=abc0065 user impact observed in region ap-south-1",
+    "stack_trace": "OutOfMemoryError at SettlementAggregator.flush\nHeap retained orphaned transaction buffers",
+    "resolution_notes": "Patched the leaking aggregator, reduced batch size, and rolled out a memory limit alert",
+    "severity": "CRITICAL",
+    "timestamp": "2026-01-09T03:14:00",
+    "incident_id": "INC1065",
+    "tags": [
+      "payment",
+      "critical"
+    ]
+  },
+  {
+    "service_name": "gateway-service",
+    "log_level": "ERROR",
+    "error_message": "Network timeout to upstream order service over internal mesh correlation_id=flow-0066 detected by synthetic monitor",
+    "stack_trace": "SocketTimeoutException at MeshClient.execute\nRetries exhausted after packet loss",
+    "resolution_notes": "Repaired the mesh sidecar routing rule, restored east-west connectivity, and tuned retry backoff",
+    "severity": "HIGH",
+    "timestamp": "2026-01-09T06:15:00",
+    "incident_id": "INC1066",
+    "tags": [
+      "gateway",
+      "high"
+    ]
+  },
+  {
+    "service_name": "auth-service",
+    "log_level": "ERROR",
+    "error_message": "OAuth refresh token store unavailable due to database lock contention span_id=mesh-0067 observed during canary rollout",
+    "stack_trace": "DatabaseLockException at RefreshTokenRepository.update\nDeadlock found when trying to get lock",
+    "resolution_notes": "Killed the blocking transaction, added index coverage, and reduced refresh token update contention",
+    "severity": "HIGH",
+    "timestamp": "2026-01-09T09:16:00",
+    "incident_id": "INC1067",
+    "tags": [
+      "auth",
+      "high"
+    ]
+  },
+  {
+    "service_name": "notification-service",
+    "log_level": "ERROR",
+    "error_message": "SMTP gateway unreachable during notification dispatch after request_id=req-0068 from 10.10.6.21",
+    "stack_trace": "NotificationDeliveryException at EmailSender.send\nConnection refused by relay host",
+    "resolution_notes": "Failed over to the backup relay, updated the egress firewall rule, and lowered SMTP connection reuse",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-09T12:00:00",
+    "incident_id": "INC1068",
+    "tags": [
+      "notification",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "order-service",
+    "log_level": "ERROR",
+    "error_message": "Kafka producer retry exhaustion while publishing order-created event trace_id=abc0069 user impact observed in region ap-south-1",
+    "stack_trace": "KafkaPublishException at OrderPublisher.emit\nNo broker available for partition leadership",
+    "resolution_notes": "Recovered Kafka brokers, re-enabled idempotent producer retries, and drained the failed publisher queue",
+    "severity": "HIGH",
+    "timestamp": "2026-01-09T15:01:00",
+    "incident_id": "INC1069",
+    "tags": [
+      "order",
+      "high"
+    ]
+  },
+  {
+    "service_name": "payment-service",
+    "log_level": "ERROR",
+    "error_message": "Database connection timeout while processing card charge correlation_id=flow-0070 detected by synthetic monitor",
+    "stack_trace": "DBConnectionTimeoutException at PaymentRepository.save\nCaused by socket timeout to primary postgres",
+    "resolution_notes": "Restarted PostgreSQL service, increased connection timeout, and tuned pool saturation thresholds",
+    "severity": "HIGH",
+    "timestamp": "2026-01-09T18:02:00",
+    "incident_id": "INC1070",
+    "tags": [
+      "payment",
+      "high"
+    ]
+  },
+  {
+    "service_name": "auth-service",
+    "log_level": "ERROR",
+    "error_message": "JWT token signature validation failed for access token span_id=mesh-0071 observed during canary rollout",
+    "stack_trace": "TokenValidationException at AuthMiddleware.verify\nIssuer mismatch on rotated public key",
+    "resolution_notes": "Rotated the expired signing key, refreshed issuer metadata, and invalidated stale token cache entries",
+    "severity": "HIGH",
+    "timestamp": "2026-01-09T21:03:00",
+    "incident_id": "INC1071",
+    "tags": [
+      "auth",
+      "high"
+    ]
+  },
+  {
+    "service_name": "notification-service",
+    "log_level": "ERROR",
+    "error_message": "Kafka consumer lag exceeded threshold due to broker timeout after request_id=req-0072 from 10.10.1.25",
+    "stack_trace": "KafkaTimeoutError at NotificationEventConsumer.poll\nLeader election in progress",
+    "resolution_notes": "Recovered broker quorum, rebalanced the consumer group, and increased fetch timeout settings",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-10T00:04:00",
+    "incident_id": "INC1072",
+    "tags": [
+      "notification",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "order-service",
+    "log_level": "ERROR",
+    "error_message": "Redis cache connection reset by peer during order lookup trace_id=abc0073 user impact observed in region ap-south-1",
+    "stack_trace": "RedisConnectionError at OrderCache.load\nConnection pool exhausted",
+    "resolution_notes": "Restarted Redis primary, flushed the broken connection pool, and raised client pool limits",
+    "severity": "HIGH",
+    "timestamp": "2026-01-10T03:05:00",
+    "incident_id": "INC1073",
+    "tags": [
+      "order",
+      "high"
+    ]
+  },
+  {
+    "service_name": "gateway-service",
+    "log_level": "WARNING",
+    "error_message": "CPU spike triggered upstream latency and circuit breaker fallback correlation_id=flow-0074 detected by synthetic monitor",
+    "stack_trace": "GatewayOverloadException at UpstreamProxy.forward\nCPU usage exceeded 92 percent",
+    "resolution_notes": "Scaled gateway replicas horizontally, enabled request shedding, and optimized expensive middleware",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-10T06:06:00",
+    "incident_id": "INC1074",
+    "tags": [
+      "gateway",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "payment-service",
+    "log_level": "CRITICAL",
+    "error_message": "Memory leak detected in settlement worker causing pod eviction span_id=mesh-0075 observed during canary rollout",
+    "stack_trace": "OutOfMemoryError at SettlementAggregator.flush\nHeap retained orphaned transaction buffers",
+    "resolution_notes": "Patched the leaking aggregator, reduced batch size, and rolled out a memory limit alert",
+    "severity": "CRITICAL",
+    "timestamp": "2026-01-10T09:07:00",
+    "incident_id": "INC1075",
+    "tags": [
+      "payment",
+      "critical"
+    ]
+  },
+  {
+    "service_name": "gateway-service",
+    "log_level": "ERROR",
+    "error_message": "Network timeout to upstream order service over internal mesh after request_id=req-0076 from 10.10.5.10",
+    "stack_trace": "SocketTimeoutException at MeshClient.execute\nRetries exhausted after packet loss",
+    "resolution_notes": "Repaired the mesh sidecar routing rule, restored east-west connectivity, and tuned retry backoff",
+    "severity": "HIGH",
+    "timestamp": "2026-01-10T12:08:00",
+    "incident_id": "INC1076",
+    "tags": [
+      "gateway",
+      "high"
+    ]
+  },
+  {
+    "service_name": "auth-service",
+    "log_level": "ERROR",
+    "error_message": "OAuth refresh token store unavailable due to database lock contention trace_id=abc0077 user impact observed in region ap-south-1",
+    "stack_trace": "DatabaseLockException at RefreshTokenRepository.update\nDeadlock found when trying to get lock",
+    "resolution_notes": "Killed the blocking transaction, added index coverage, and reduced refresh token update contention",
+    "severity": "HIGH",
+    "timestamp": "2026-01-10T15:09:00",
+    "incident_id": "INC1077",
+    "tags": [
+      "auth",
+      "high"
+    ]
+  },
+  {
+    "service_name": "notification-service",
+    "log_level": "ERROR",
+    "error_message": "SMTP gateway unreachable during notification dispatch correlation_id=flow-0078 detected by synthetic monitor",
+    "stack_trace": "NotificationDeliveryException at EmailSender.send\nConnection refused by relay host",
+    "resolution_notes": "Failed over to the backup relay, updated the egress firewall rule, and lowered SMTP connection reuse",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-10T18:10:00",
+    "incident_id": "INC1078",
+    "tags": [
+      "notification",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "order-service",
+    "log_level": "ERROR",
+    "error_message": "Kafka producer retry exhaustion while publishing order-created event span_id=mesh-0079 observed during canary rollout",
+    "stack_trace": "KafkaPublishException at OrderPublisher.emit\nNo broker available for partition leadership",
+    "resolution_notes": "Recovered Kafka brokers, re-enabled idempotent producer retries, and drained the failed publisher queue",
+    "severity": "HIGH",
+    "timestamp": "2026-01-10T21:11:00",
+    "incident_id": "INC1079",
+    "tags": [
+      "order",
+      "high"
+    ]
+  },
+  {
+    "service_name": "payment-service",
+    "log_level": "ERROR",
+    "error_message": "Database connection timeout while processing card charge after request_id=req-0080 from 10.10.9.14",
+    "stack_trace": "DBConnectionTimeoutException at PaymentRepository.save\nCaused by socket timeout to primary postgres",
+    "resolution_notes": "Restarted PostgreSQL service, increased connection timeout, and tuned pool saturation thresholds",
+    "severity": "HIGH",
+    "timestamp": "2026-01-11T00:12:00",
+    "incident_id": "INC1080",
+    "tags": [
+      "payment",
+      "high"
+    ]
+  },
+  {
+    "service_name": "auth-service",
+    "log_level": "ERROR",
+    "error_message": "JWT token signature validation failed for access token trace_id=abc0081 user impact observed in region ap-south-1",
+    "stack_trace": "TokenValidationException at AuthMiddleware.verify\nIssuer mismatch on rotated public key",
+    "resolution_notes": "Rotated the expired signing key, refreshed issuer metadata, and invalidated stale token cache entries",
+    "severity": "HIGH",
+    "timestamp": "2026-01-11T03:13:00",
+    "incident_id": "INC1081",
+    "tags": [
+      "auth",
+      "high"
+    ]
+  },
+  {
+    "service_name": "notification-service",
+    "log_level": "ERROR",
+    "error_message": "Kafka consumer lag exceeded threshold due to broker timeout correlation_id=flow-0082 detected by synthetic monitor",
+    "stack_trace": "KafkaTimeoutError at NotificationEventConsumer.poll\nLeader election in progress",
+    "resolution_notes": "Recovered broker quorum, rebalanced the consumer group, and increased fetch timeout settings",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-11T06:14:00",
+    "incident_id": "INC1082",
+    "tags": [
+      "notification",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "order-service",
+    "log_level": "ERROR",
+    "error_message": "Redis cache connection reset by peer during order lookup span_id=mesh-0083 observed during canary rollout",
+    "stack_trace": "RedisConnectionError at OrderCache.load\nConnection pool exhausted",
+    "resolution_notes": "Restarted Redis primary, flushed the broken connection pool, and raised client pool limits",
+    "severity": "HIGH",
+    "timestamp": "2026-01-11T09:15:00",
+    "incident_id": "INC1083",
+    "tags": [
+      "order",
+      "high"
+    ]
+  },
+  {
+    "service_name": "gateway-service",
+    "log_level": "WARNING",
+    "error_message": "CPU spike triggered upstream latency and circuit breaker fallback after request_id=req-0084 from 10.10.4.18",
+    "stack_trace": "GatewayOverloadException at UpstreamProxy.forward\nCPU usage exceeded 92 percent",
+    "resolution_notes": "Scaled gateway replicas horizontally, enabled request shedding, and optimized expensive middleware",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-11T12:16:00",
+    "incident_id": "INC1084",
+    "tags": [
+      "gateway",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "payment-service",
+    "log_level": "CRITICAL",
+    "error_message": "Memory leak detected in settlement worker causing pod eviction trace_id=abc0085 user impact observed in region ap-south-1",
+    "stack_trace": "OutOfMemoryError at SettlementAggregator.flush\nHeap retained orphaned transaction buffers",
+    "resolution_notes": "Patched the leaking aggregator, reduced batch size, and rolled out a memory limit alert",
+    "severity": "CRITICAL",
+    "timestamp": "2026-01-11T15:00:00",
+    "incident_id": "INC1085",
+    "tags": [
+      "payment",
+      "critical"
+    ]
+  },
+  {
+    "service_name": "gateway-service",
+    "log_level": "ERROR",
+    "error_message": "Network timeout to upstream order service over internal mesh correlation_id=flow-0086 detected by synthetic monitor",
+    "stack_trace": "SocketTimeoutException at MeshClient.execute\nRetries exhausted after packet loss",
+    "resolution_notes": "Repaired the mesh sidecar routing rule, restored east-west connectivity, and tuned retry backoff",
+    "severity": "HIGH",
+    "timestamp": "2026-01-11T18:01:00",
+    "incident_id": "INC1086",
+    "tags": [
+      "gateway",
+      "high"
+    ]
+  },
+  {
+    "service_name": "auth-service",
+    "log_level": "ERROR",
+    "error_message": "OAuth refresh token store unavailable due to database lock contention span_id=mesh-0087 observed during canary rollout",
+    "stack_trace": "DatabaseLockException at RefreshTokenRepository.update\nDeadlock found when trying to get lock",
+    "resolution_notes": "Killed the blocking transaction, added index coverage, and reduced refresh token update contention",
+    "severity": "HIGH",
+    "timestamp": "2026-01-11T21:02:00",
+    "incident_id": "INC1087",
+    "tags": [
+      "auth",
+      "high"
+    ]
+  },
+  {
+    "service_name": "notification-service",
+    "log_level": "ERROR",
+    "error_message": "SMTP gateway unreachable during notification dispatch after request_id=req-0088 from 10.10.8.22",
+    "stack_trace": "NotificationDeliveryException at EmailSender.send\nConnection refused by relay host",
+    "resolution_notes": "Failed over to the backup relay, updated the egress firewall rule, and lowered SMTP connection reuse",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-12T00:03:00",
+    "incident_id": "INC1088",
+    "tags": [
+      "notification",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "order-service",
+    "log_level": "ERROR",
+    "error_message": "Kafka producer retry exhaustion while publishing order-created event trace_id=abc0089 user impact observed in region ap-south-1",
+    "stack_trace": "KafkaPublishException at OrderPublisher.emit\nNo broker available for partition leadership",
+    "resolution_notes": "Recovered Kafka brokers, re-enabled idempotent producer retries, and drained the failed publisher queue",
+    "severity": "HIGH",
+    "timestamp": "2026-01-12T03:04:00",
+    "incident_id": "INC1089",
+    "tags": [
+      "order",
+      "high"
+    ]
+  },
+  {
+    "service_name": "payment-service",
+    "log_level": "ERROR",
+    "error_message": "Database connection timeout while processing card charge correlation_id=flow-0090 detected by synthetic monitor",
+    "stack_trace": "DBConnectionTimeoutException at PaymentRepository.save\nCaused by socket timeout to primary postgres",
+    "resolution_notes": "Restarted PostgreSQL service, increased connection timeout, and tuned pool saturation thresholds",
+    "severity": "HIGH",
+    "timestamp": "2026-01-12T06:05:00",
+    "incident_id": "INC1090",
+    "tags": [
+      "payment",
+      "high"
+    ]
+  },
+  {
+    "service_name": "auth-service",
+    "log_level": "ERROR",
+    "error_message": "JWT token signature validation failed for access token span_id=mesh-0091 observed during canary rollout",
+    "stack_trace": "TokenValidationException at AuthMiddleware.verify\nIssuer mismatch on rotated public key",
+    "resolution_notes": "Rotated the expired signing key, refreshed issuer metadata, and invalidated stale token cache entries",
+    "severity": "HIGH",
+    "timestamp": "2026-01-12T09:06:00",
+    "incident_id": "INC1091",
+    "tags": [
+      "auth",
+      "high"
+    ]
+  },
+  {
+    "service_name": "notification-service",
+    "log_level": "ERROR",
+    "error_message": "Kafka consumer lag exceeded threshold due to broker timeout after request_id=req-0092 from 10.10.3.26",
+    "stack_trace": "KafkaTimeoutError at NotificationEventConsumer.poll\nLeader election in progress",
+    "resolution_notes": "Recovered broker quorum, rebalanced the consumer group, and increased fetch timeout settings",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-12T12:07:00",
+    "incident_id": "INC1092",
+    "tags": [
+      "notification",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "order-service",
+    "log_level": "ERROR",
+    "error_message": "Redis cache connection reset by peer during order lookup trace_id=abc0093 user impact observed in region ap-south-1",
+    "stack_trace": "RedisConnectionError at OrderCache.load\nConnection pool exhausted",
+    "resolution_notes": "Restarted Redis primary, flushed the broken connection pool, and raised client pool limits",
+    "severity": "HIGH",
+    "timestamp": "2026-01-12T15:08:00",
+    "incident_id": "INC1093",
+    "tags": [
+      "order",
+      "high"
+    ]
+  },
+  {
+    "service_name": "gateway-service",
+    "log_level": "WARNING",
+    "error_message": "CPU spike triggered upstream latency and circuit breaker fallback correlation_id=flow-0094 detected by synthetic monitor",
+    "stack_trace": "GatewayOverloadException at UpstreamProxy.forward\nCPU usage exceeded 92 percent",
+    "resolution_notes": "Scaled gateway replicas horizontally, enabled request shedding, and optimized expensive middleware",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-12T18:09:00",
+    "incident_id": "INC1094",
+    "tags": [
+      "gateway",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "payment-service",
+    "log_level": "CRITICAL",
+    "error_message": "Memory leak detected in settlement worker causing pod eviction span_id=mesh-0095 observed during canary rollout",
+    "stack_trace": "OutOfMemoryError at SettlementAggregator.flush\nHeap retained orphaned transaction buffers",
+    "resolution_notes": "Patched the leaking aggregator, reduced batch size, and rolled out a memory limit alert",
+    "severity": "CRITICAL",
+    "timestamp": "2026-01-12T21:10:00",
+    "incident_id": "INC1095",
+    "tags": [
+      "payment",
+      "critical"
+    ]
+  },
+  {
+    "service_name": "gateway-service",
+    "log_level": "ERROR",
+    "error_message": "Network timeout to upstream order service over internal mesh after request_id=req-0096 from 10.10.7.11",
+    "stack_trace": "SocketTimeoutException at MeshClient.execute\nRetries exhausted after packet loss",
+    "resolution_notes": "Repaired the mesh sidecar routing rule, restored east-west connectivity, and tuned retry backoff",
+    "severity": "HIGH",
+    "timestamp": "2026-01-13T00:11:00",
+    "incident_id": "INC1096",
+    "tags": [
+      "gateway",
+      "high"
+    ]
+  },
+  {
+    "service_name": "auth-service",
+    "log_level": "ERROR",
+    "error_message": "OAuth refresh token store unavailable due to database lock contention trace_id=abc0097 user impact observed in region ap-south-1",
+    "stack_trace": "DatabaseLockException at RefreshTokenRepository.update\nDeadlock found when trying to get lock",
+    "resolution_notes": "Killed the blocking transaction, added index coverage, and reduced refresh token update contention",
+    "severity": "HIGH",
+    "timestamp": "2026-01-13T03:12:00",
+    "incident_id": "INC1097",
+    "tags": [
+      "auth",
+      "high"
+    ]
+  },
+  {
+    "service_name": "notification-service",
+    "log_level": "ERROR",
+    "error_message": "SMTP gateway unreachable during notification dispatch correlation_id=flow-0098 detected by synthetic monitor",
+    "stack_trace": "NotificationDeliveryException at EmailSender.send\nConnection refused by relay host",
+    "resolution_notes": "Failed over to the backup relay, updated the egress firewall rule, and lowered SMTP connection reuse",
+    "severity": "MEDIUM",
+    "timestamp": "2026-01-13T06:13:00",
+    "incident_id": "INC1098",
+    "tags": [
+      "notification",
+      "medium"
+    ]
+  },
+  {
+    "service_name": "order-service",
+    "log_level": "ERROR",
+    "error_message": "Kafka producer retry exhaustion while publishing order-created event span_id=mesh-0099 observed during canary rollout",
+    "stack_trace": "KafkaPublishException at OrderPublisher.emit\nNo broker available for partition leadership",
+    "resolution_notes": "Recovered Kafka brokers, re-enabled idempotent producer retries, and drained the failed publisher queue",
+    "severity": "HIGH",
+    "timestamp": "2026-01-13T09:14:00",
+    "incident_id": "INC1099",
+    "tags": [
+      "order",
+      "high"
+    ]
+  }
+]

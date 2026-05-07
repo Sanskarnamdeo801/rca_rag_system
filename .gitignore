@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.coverage
+htmlcov/
+app/data/*.log
+app/data/vector_store/*.index
+app/data/vector_store/*.npy
+app/data/vector_store/*.json

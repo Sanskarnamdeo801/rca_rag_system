@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RCA MVP</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="panel">
+        <div class="header">
+          <div>
+            <p class="eyebrow">RCA RAG MVP</p>
+            <h1>Analyze a production log fast.</h1>
+          </div>
+          <div id="health-pill" class="pill">Loading…</div>
+        </div>
+
+        <form id="analyze-form" class="stack">
+          <label>
+            Error Log
+            <textarea id="log-input" placeholder="ERROR: Redis cache connection reset by peer in order-service" required></textarea>
+          </label>
+          <label>
+            Service Name
+            <input id="service-input" type="text" placeholder="order-service" />
+          </label>
+          <button id="analyze-button" type="submit">Run RCA</button>
+          <div id="analyze-error" class="message error"></div>
+        </form>
+
+        <section class="result-box">
+          <h2>RCA Result</h2>
+          <div id="result-empty" class="empty-state">Submit a log to generate root cause analysis.</div>
+          <div id="result-content" class="hidden">
+            <p id="root-cause" class="result-title"></p>
+            <div class="pill-row">
+              <span id="severity-pill" class="pill"></span>
+              <span id="confidence-pill" class="pill"></span>
+            </div>
+            <p id="suggested-fix" class="result-body"></p>
+          </div>
+        </section>
+      </section>
+
+      <section class="panel">
+        <section class="stack upload-box">
+          <div>
+            <p class="eyebrow">Upload Logs</p>
+            <h2>Add incidents</h2>
+          </div>
+          <form id="upload-form" class="stack">
+            <input id="file-input" type="file" accept=".json,.txt" required />
+            <button id="upload-button" type="submit">Upload</button>
+            <div id="upload-message" class="message"></div>
+          </form>
+        </section>
+
+        <section class="stack list-box">
+          <div class="section-head">
+            <h2>Similar Incidents</h2>
+            <button id="similar-refresh" type="button" class="ghost-button">Refresh</button>
+          </div>
+          <div id="similar-list" class="list">
+            <div class="empty-state">No similarity results yet.</div>
+          </div>
+        </section>
+
+        <section class="stack list-box">
+          <div class="section-head">
+            <h2>Stored Incidents</h2>
+            <button id="incident-refresh" type="button" class="ghost-button">Refresh</button>
+          </div>
+          <div id="incident-list" class="list">
+            <div class="empty-state">Loading incidents…</div>
+          </div>
+        </section>
+      </section>
+    </main>
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>
